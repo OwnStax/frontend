@@ -17,14 +17,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     }, [address, router]);
 
     return (
-        <div className='p-5'>
-            <div className="flex justify-between items-center">
-                <div className="flex items-center gap-2">
+        <div className="h-screen flex flex-col">
+            <div className="flex justify-between items-center p-5">
+                <div className="flex items-center">
                     <h1 className="text-2xl font-bold">Ownstax</h1>
                 </div>
                 <ConnectKitButton />
             </div>
-            <div className="mt-5">
+            <div className="flex-1 p-5">
                 {children}
                 <Toaster />
             </div>

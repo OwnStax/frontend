@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter();
   useEffect(() => {
     if(address) {
-      router.push("/upload-data");
+      router.push("/user-type");
     }
   }, [address]);
   return (
