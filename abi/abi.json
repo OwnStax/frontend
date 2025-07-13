@@ -1,0 +1,28 @@
+[
+    {
+        "type": "function",
+        "name": "addContent",
+        "inputs": [
+            {
+                "name": "content",
+                "type": "string",
+                "internalType": "string"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "getContentsOfUser",
+        "inputs": [],
+        "outputs": [
+            {
+                "name": "",
+                "type": "string[]",
+                "internalType": "string[]"
+            }
+        ],
+        "stateMutability": "view"
+    }
+]

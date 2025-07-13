@@ -10,6 +10,7 @@ import {
 import { useState, useRef } from "react";
 import lighthouse from '@lighthouse-web3/sdk';
 import { toast } from "sonner"
+import { useAddContentMutation } from "../mutations";
 
 const LIGHTHOUS_APIKEY = process.env.NEXT_PUBLIC_LIGHTHOUSE_APIKEY;
 
@@ -19,6 +20,7 @@ export const Upload = () => {
     const [uploading, setUploading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const { mutateAsync: addContent } = useAddContentMutation();
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -35,6 +37,7 @@ export const Upload = () => {
         setUploading(true);
         try {
             const output = await lighthouse.upload([file], LIGHTHOUS_APIKEY);
+            await addContent(output.data.Hash);
             toast.success(`File uploaded successfully ${output.data.Hash}`);
             setFile(null);
             setIsOpen(false);
@@ -44,8 +47,16 @@ export const Upload = () => {
             setUploading(false);
         }
     };
+
+   const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    if (!open) {
+        setFile(null);
+    }
+   }
+
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={handleOpenChange}>
             <DialogTrigger asChild>
                 <Button>Upload</Button>
             </DialogTrigger>
